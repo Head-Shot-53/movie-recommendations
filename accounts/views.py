@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import login  # Додаємо функцію login
+from django.contrib.auth import login  
 from .forms import UserRegisterForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
@@ -40,8 +40,8 @@ def success(request):
 
 def recommend_movies(request):
     if request.method == 'POST':
-        title = request.POST.get('title', '').lower()  # Отримуємо назву фільму
-        count = request.POST.get('count', '')  # Отримуємо кількість рекомендацій
+        title = request.POST.get('title', '').lower() 
+        count = request.POST.get('count', '') 
         try:
             results = mp.give_recomendations(title, int(count))
 
@@ -58,33 +58,5 @@ def recommend_movies(request):
     return render(request, 'accounts/recommend.html')
 
 
-# def recommend_movies(request):
-#     if request.method == 'POST':
-#         title = request.POST.get('title', '').strip()  # Отримуємо назву фільму
-#         count = request.POST.get('count', '')
-#         try:
-#         # Логування значень
-#             print(f"Title: {title}, Count: {count}")
 
-#             return render(request, 'accounts/recommend.html', {
-#                 'recommendations': [{'original_title': 'Test Movie', 'overview': 'This is a test movie.', 'original_language': 'en'}]
-#             })
-#         except ValueError as e:
-#             return render(request, 'accounts/recommend.html', {'error': str(e)})
-
-#         # if not title or not count:
-#         #     return render(request, 'accounts/recommend.html', {'error': 'Please provide both title and count.'})
-
-#         # try:
-#         #     # Перевірка на порожні результати
-#         #     results = mp.give_recomendations(title, int(count))
-#         #     if results.empty:
-#         #         return render(request, 'accounts/recommend.html', {'error': 'No recommendations found.'})
-#         # except ValueError as e:
-#         #     return render(request, 'accounts/recommend.html', {'error': str(e)})
-
-#         # # Повертаємо результати
-#         # return render(request, 'accounts/recommend.html', {'movies': results.to_dict(orient='records')})
-
-#     return render(request, 'accounts/recommend.html')
 
